@@ -13,7 +13,7 @@ PARENT_PATH=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 
 # Ensure file main.tex and main.bbl exist
 MAIN_TEX="main.tex"
-MAIN_BBL="main.bbl"
+MAIN_BBL=".pdf/main.bbl"
 if [[ ! -f "$MAIN_TEX" ]]; then
   echo "File $MAIN_TEX  does not exist..."
   exit 1
@@ -23,7 +23,7 @@ if [[ ! -f "$MAIN_BBL" ]]; then
   exit 1
 fi
 # Copy only figures required to arxiv folder, remove comments from all sources, expand bib to bbl inside main tex.
-perl $PARENT_PATH/latexpand --copy-figures --empty-comments --show-graphics --verbose --expand-bbl main.bbl main.tex -o main-stripped.tex
+perl $PARENT_PATH/latexpand --copy-figures --empty-comments --show-graphics --verbose --expand-bbl $MAIN_BBL $MAIN_TEX -o main-stripped.tex
 
 # Zip relevant files into arxiv_submission.zip
 # Clean previous zips
